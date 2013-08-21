@@ -15,8 +15,8 @@ Header files should be organized as so:
 #import "XYZCar.h"
 
 //Classes should be forward declared whenever possible
-@Class XYZDriver
-@Class XYZPassenger
+@Class XYZDriver;
+@Class XYZPassenger;
 
 //Any protocol definitions next. Protocol should always include the class name in its own name.
 @protocol XYZNoteViewDelegate <NSObject>
