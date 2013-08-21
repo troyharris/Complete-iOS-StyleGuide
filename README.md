@@ -2,7 +2,23 @@ Complete-iOS-StyleGuide
 =======================
 v0.0.1
 
-*Note: This is still a work in progress
+*Note: This is still a work in progress*
+
+Variables
+---------
+Variables should be named descriptively and avoid use of acronyms. Pointer asterisk should be with the variable name. If the variable is of a common type, avoid putting that in the name. Variable names should start with a lowercase letter and be camelcased.
+
+**Examples**
+```Objective-C
+//Good
+NSString *carModel = @"Mustang";
+CGFloat noteViewWidth = 30;
+
+
+//Bad
+NSString * carModelString = @"Mustang";
+CGFloat nwidth = 30;
+```
 
 Class Headers
 ------------
