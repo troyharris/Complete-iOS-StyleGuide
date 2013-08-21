@@ -20,6 +20,20 @@ NSString * carModelString = @"Mustang";
 CGFloat nwidth = 30;
 ```
 
+Methods
+-------
+Methods should be formatted as so (notice the space after the scope symbol)
+
+```Objective-C
+//Instance method
+- (void)buildJSONRequestFromString:(NSString *)request withTag:(int)tag;
+ 
+//Class method
++ (XYZString *)uppercaseStringFromString:(NSString *)string;
+```
+Method names should be as descriptive as possible. Avoid using names that start off with *set* or *get* unless it is a setter or getter method. Also avoid the prefix *is* unless it returns a BOOL.
+
+
 Class Headers
 ------------
 Header files should be organized as so:
