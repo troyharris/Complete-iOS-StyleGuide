@@ -32,7 +32,7 @@ Header files should be organized as so:
 @property (nonatomic, strong) XYZDriver *driver;
 
 //Even create properties for C primitive types
-@property (nonatomic) int numberOfCrashes;
+@property int numberOfCrashes;
 
 //Instance methods
 - (NSString *)driverNameFromDriver:(Driver *)driver;
