@@ -130,6 +130,8 @@ NSDictionary *driver = @{@"name": name, @"maxSpeed": maxSpeed, @"nickName": @"cr
 
 Class Headers
 ------------
+Keep headers as simple as possible. Only include properties and methods that other classes need access to. Consider making some properties readonly if they shouldn't be changed by an outside class. 
+
 Header files should be organized as so:
 
 ```Objective-C
@@ -138,7 +140,7 @@ Header files should be organized as so:
 #import <UIKit/UIKit.h>
 #import "XYZCar.h"
 
-//Classes should be forward declared whenever possible
+//Classes should be forward declared whenever possible. Just make sure you #import in the .m file.
 @Class XYZDriver;
 @Class XYZPassenger;
 
