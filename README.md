@@ -157,10 +157,10 @@ Header files should be organized as so:
 @Class XYZPassenger;
 
 //Any protocol definitions next. Protocol should always include the class name in its own name.
-@protocol XYZNoteViewDelegate <NSObject>
+@protocol XYZNotePopoverDelegate <NSObject>
 
 @optional
-- (void)closedPopover;
+- (void)closedPopover:(XYZNotePopover *)notePopover;
 
 @end
 
@@ -216,6 +216,7 @@ For example:
 - (void)closedPopover:(XYZNotePopover *)notePopover;
 
 @end
+```
 
 Subclassing, Categories and Extensions
 --------------------------------------
