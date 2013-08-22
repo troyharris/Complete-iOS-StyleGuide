@@ -159,6 +159,7 @@ Header files should be organized as so:
 //Any protocol definitions next. Protocol should always include the class name in its own name.
 @protocol XYZNoteViewDelegate <NSObject>
 
+@optional
 - (void)closedPopover;
 
 @end
@@ -200,6 +201,21 @@ Each of these sections should be seperated with a `#pragma mark` as so:
 ```
 
 Sections can be further broken down into subsections by using `#pragma mark` without the hyphen.
+
+Protocols
+---------
+Protocol methods go under `@optional` unless a delegation absolutely won't function without the protocol method. It is good practice to allow the object of the protocol to be passed to the delegate. This will allow multiple delegations on the delegate object.
+
+For example:
+```Objective-C
+@protocol XYZNotePopoverDelegate <NSObject>
+
+@optional
+
+//We pass the XYZNotePopover to the delegate so it can determine who called it.
+- (void)closedPopover:(XYZNotePopover *)notePopover;
+
+@end
 
 Subclassing, Categories and Extensions
 --------------------------------------
