@@ -25,7 +25,7 @@ carCount++;
 
 Prefixing
 ---------
-Every project should have a three character prefix to be used in class names, static variables, `#define`s, etc. Each project should have its own prefix rather than using a company prefix or a person's initials.
+Every project should have a three character, capitolized prefix to be used in class names, static variables, `#define`s, etc. Each project should have its own prefix rather than using a company prefix or a person's initials.
 
 Core data names and NSManagedObject subclasses should not use the prefix.
 
@@ -127,6 +127,10 @@ NSNumber *halfSpeed = @(maxSpeed / 2);
 NSArray *colorNames = @[@"blue", @"red", @"green"];
 NSDictionary *driver = @{@"name": name, @"maxSpeed": maxSpeed, @"nickName": @"crash"};
 ```
+
+View Controller Class Names
+-----------
+View controller names follow standard class naming conventions (capitolized project prefix, camelcased descriptive name) but are also suffixed with either `ViewController`, `TableViewController` or `CollectionViewController`, depending on type. Avoid shortening to `VC`, `TVC`, or `CVC`.
 
 Class Headers
 ------------
