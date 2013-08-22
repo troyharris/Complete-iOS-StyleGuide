@@ -136,6 +136,26 @@ NSArray *colorNames = @[@"blue", @"red", @"green"];
 NSDictionary *driver = @{@"name": name, @"maxSpeed": maxSpeed, @"nickName": @"crash"};
 ```
 
+Booleans
+--------
+`BOOL` should always be used over `bool`. BOOLs should always be compared as so:
+
+```Objective-C
+//Good
+if (person.isRunning) {
+}
+if (!person.isRunning) {
+}
+
+//Bad
+if (person.isRunning == nil) {
+}
+if (person.isRunning == NO) {
+}
+if (person.isRunning == YES) {
+}
+```
+
 View Controller Class Names
 -----------
 View controller names follow standard class naming conventions (capitolized project prefix, camelcased descriptive name) but are also suffixed with either `ViewController`, `TableViewController` or `CollectionViewController`, depending on type. Avoid shortening to `VC`, `TVC`, or `CVC`.
