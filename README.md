@@ -45,6 +45,14 @@ NSString * carModelString = @"Mustang";
 CGFloat nwidth = 30;
 ```
 
+There are times when it is acceptible to add the type in the variable name when omitting it may lead to confusion. For example:
+
+```Objective-C
+NSDate *currentDate = [NSDate date];
+//'String' is appended to the variable name to avoid confusion that it might be an NSDate object.
+NSString *currentDateString = [XYZDateFormatter stringFromDate:currentDate];
+```
+
 Methods
 -------
 Methods should be formatted as so (notice the space after the scope symbol)
