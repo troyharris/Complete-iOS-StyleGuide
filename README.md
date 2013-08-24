@@ -156,6 +156,26 @@ if (person.isRunning == YES) {
 }
 ```
 
+Foundation Data Types vs C Primative Data Types
+-----------------------------------------------
+Use `NSInteger`, `NSUInteger` and 'CGFloat' instead of `int`, `long`, `unsigned int`, `unsigned long`, `float`, or `double`. This makes your code 64bit safe.
+
+CGGeometry Methods
+------------------
+Use CGGeometry methods (`CGRectGetMinX`, `CGRectGetHeight`, etc) rather than grabbing frame properties manually. 
+
+**Example**
+
+```Objective-C
+//Good
+CGFloat carWidth = CGRectGetWidth(car.frame);
+
+//Bad
+CGFloat carWidth = car.frame.size.width;
+```
+
+Also, consider the other awesome abilities of CGGeometry when manupulating `CGRect`s in any way. NSHipster has [a good article](http://nshipster.com/cggeometry/) about this.
+
 View Controller Class Names
 -----------
 View controller names follow standard class naming conventions (capitolized project prefix, camelcased descriptive name) but are also suffixed with either `ViewController`, `TableViewController` or `CollectionViewController`, depending on type. Avoid shortening to `VC`, `TVC`, or `CVC`.
