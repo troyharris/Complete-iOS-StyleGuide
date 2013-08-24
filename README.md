@@ -29,6 +29,61 @@ Every project should have a three character, capitolized prefix to be used in cl
 
 Core data names and NSManagedObject subclasses should not use the prefix.
 
+Brackets
+--------
+Opening brackets should be at the end of line of the statement they are bracketing. Closing brackets should be on their own lines. Conditionals should always have brackets.
+
+*Example*
+```Objective-C
+//Good
+if (number == 1) {
+	[self doThings];
+}
+
+//Bad
+if (number == 1)
+{
+	[self doThings];
+}
+
+//Bad
+if (number == 1)
+	[self doThings];
+
+//Bad
+if (number == 1) [self doThings];
+
+//Bad
+if (number == 1) { [self doThings]; }
+```
+
+An exception to the rule is `else` statements. These should be on the same line as the closing bracket. This serves as a visual indicator that the `else` block is related to the `if` block.
+
+*Example*
+```Objective-C
+//Good
+if (number == 1) {
+	[self doSomething];
+} else {
+	[self doSomethingElse];
+}
+
+//Good
+if (number == 1) {
+	[self doSomething];
+} else if (number == 2) {
+	[self doSomethingElse];
+}
+
+//Bad
+if (number == 1) {
+	[self doSomething];
+}
+else {
+	[self doSomethingElse];
+}
+```
+
 Variables
 ---------
 Variables should be named descriptively and avoid use of acronyms. Pointer asterisk should be with the variable name. If the variable is of a common type, avoid putting that in the name. Variable names should start with a lowercase letter and be camelcased.
