@@ -179,6 +179,30 @@ static CGFloat const kXYZMenuTopMargin = 80;
 
 Use of `#define` to set constants should be avoided.
 
+Enum and bitmasks
+-----------------
+An `enum` should be defined using NS_ENUM and bitmasks should be defined using NS_OPTIONS. The enum or bitmask should be named using the project prefix
+
+**Examples**
+
+```Objective-C
+// enum
+typedef NS_ENUM(NSInteger, XYZCarType) {
+    XYZCarTypeVan,
+    XYZCarTypeTruck,
+    XYZCarTypeSedan,
+    XYZCarTypeHybrid
+};
+
+// bitmask
+typedef NS_OPTIONS(NSInteger, XYZCollisionCategory) {
+    XYZCollisionCategoryCar,
+    XYZCollisionCategoryWall,
+    XYZCollisionCategoryBuilding,
+    XYZCollisionCategoryPerson
+};
+```
+
 Literals
 --------
 `NSString`, `NSNumber`, `NSArray`, and `NSDictionary` literals should be used whenever possible.
