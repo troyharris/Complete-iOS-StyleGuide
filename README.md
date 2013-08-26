@@ -1,13 +1,30 @@
 Complete iOS Developer Style Guide
-=======================
+==================================
 
 There are many Objective-C / CocoaTouch / iOS style guides out there but none of them touch on everything. This is an attempt to be a complete style guide that will cover all aspects of iOS/Objective-C development.
 
 This guide is ultimately intended to be a community project, owned by everyone. Push requests are asked for to fill in the holes, fix problems, or add clarity and detail. If you are submitting a change or addition that is non-standard or obscure, please include some reference as to the reasoning. Apple documentation and community consensus will trump personal preference.
 
-Version History
----------------
-v0.0.1 - 2013-08-31 - Initial version with many missing pieces
+Table of Contents
+-----------------
+* [Comments](#comments)
+* [Prefixing](#prefixing)
+* [Brackets](#brackets)
+* [Variables](#variables)
+* [Methods](#methods)
+* [Properties](#properties)
+* [Constants](#constants)
+* [Enums and Bitmasks](#enums-and-bitmasks)
+* [Literals](#literals)
+* [Booleans](#booleans)
+* [Foundation Data Types vs C Primative Data Types](#foundation-data-types-vs-c-primative-data-types)
+* [Dynamic vs Static Typing](#dynamic-vs-static-typing)
+* [CGGeometry Methods](#cggeometry-methods)
+* [View Controller Class Names](#view-controller-class-names)
+* [Class Headers](#class-headers)
+* [Implementation](#implementation)
+* [Subclassing, Categories and Extensions](#subclassing-categories-and-extensions)
+* [Project Organization](#project-organization)
 
 Comments
 --------
@@ -179,7 +196,7 @@ static CGFloat const kXYZMenuTopMargin = 80;
 
 Use of `#define` to set constants should be avoided.
 
-Enum and bitmasks
+Enums and bitmasks
 -----------------
 An `enum` should be defined using NS_ENUM and bitmasks should be defined using NS_OPTIONS. The enum or bitmask should be named using the project prefix
 
