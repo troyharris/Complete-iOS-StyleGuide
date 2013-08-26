@@ -239,6 +239,19 @@ Foundation Data Types vs C Primative Data Types
 -----------------------------------------------
 Use `NSInteger`, `NSUInteger` and 'CGFloat' instead of `int`, `long`, `unsigned int`, `unsigned long`, `float`, or `double`. This makes your code 64bit safe.
 
+Dynamic vs Static Typing
+------------------------
+Static typing should nearly always be used unless dynamic typing is absolutely necessary or greatly simplifies the code.
+
+**Example**
+```Objective-C
+//Good
+NSString *name = @"Waldo";
+
+//Bad (unless you have a very good reason to do it)
+id name = @"Waldo";
+```
+
 CGGeometry Methods
 ------------------
 Use CGGeometry methods (`CGRectGetMinX`, `CGRectGetHeight`, etc) rather than grabbing frame properties manually. 
