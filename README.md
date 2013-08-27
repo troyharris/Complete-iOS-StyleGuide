@@ -357,6 +357,8 @@ Protocol methods go under `@optional` unless a delegation absolutely won't funct
 
 For example:
 ```Objective-C
+//We must call @class first on our own class because the @protocol comes before the @interface
+@class XYZNotePopover
 @protocol XYZNotePopoverDelegate <NSObject>
 
 @optional
