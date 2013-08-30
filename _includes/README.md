@@ -25,6 +25,7 @@ Table of Contents
 * [Subclassing, Categories and Extensions](#subclassing-categories-and-extensions)
 * [Project Organization](#project-organization)
 
+<a name="comments"></a>
 Comments
 --------
 Objective-C should be coded in a way that is very descriptive. If done right, comments can be kept to a minimum. Only comment when you need to explain *why* the code is written the way it is.
@@ -40,12 +41,14 @@ int carCount = 0;
 carCount++;
 ```
 
+<a name="prefixing"></a>
 Prefixing
 ---------
 Every project should have a three character, capitolized prefix to be used in class names, static variables, `#define`s, etc. Each project should have its own prefix rather than using a company prefix or a person's initials.
 
 Core data names and NSManagedObject subclasses should not use the prefix.
 
+<a name="brackets"></a>
 Brackets
 --------
 Opening brackets should be at the end of line of the statement they are bracketing. Closing brackets should be on their own lines. Conditionals should always have brackets.
@@ -103,6 +106,7 @@ else {
 }
 ```
 
+<a name="variables"></a>
 Variables
 ---------
 Variables should be named descriptively and avoid use of acronyms. Pointer asterisk should be with the variable name. If the variable is of a common type, avoid putting that in the name. Variable names should start with a lowercase letter and be camelcased.
@@ -128,6 +132,7 @@ NSDate *currentDate = [NSDate date];
 NSString *currentDateString = [XYZDateFormatter stringFromDate:currentDate];
 ```
 
+<a name="methods"></a>
 Methods
 -------
 Methods should be formatted as so (notice the space after the scope symbol)
@@ -157,6 +162,7 @@ If possible, methods should return its last line of code:
 }
 ```
 
+<a name="properties"></a>
 Properties
 ----------
 Properties should be defined for all instance variables whenever possible. Only declare properties in the header file when outside classes need access. Avoid using @synthesize unless needed to make a public readonly property privately writable. Avoid accessing instance variables directly unless in initializer methods, dealloc, or getter and setter methods.
@@ -189,6 +195,7 @@ _notes = [[NSArray alloc] init];
 
 Properties should always be accessed using dot notation (`car.model` rather than `[car model] or [car setModel]`).
 
+<a name="constants"></a>
 Constants
 ---------
 Instance constants should start with a lowercase `k`, followed by the project prefix, followed by a descriptive name.
@@ -202,6 +209,7 @@ static CGFloat const kXYZMenuTopMargin = 80;
 
 Use of `#define` to set constants should be avoided.
 
+<a name="enums-and-bitmasks"></a>
 Enums and bitmasks
 -----------------
 An `enum` should be defined using NS_ENUM and bitmasks should be defined using NS_OPTIONS. The enum or bitmask should be named using the project prefix
@@ -226,6 +234,7 @@ typedef NS_OPTIONS(NSInteger, XYZCollisionCategory) {
 };
 ```
 
+<a name="literals"></a>
 Literals
 --------
 `NSString`, `NSNumber`, `NSArray`, and `NSDictionary` literals should be used whenever possible.
@@ -259,6 +268,7 @@ if (person.isRunning == YES) {
 }
 ```
 
+<a name="foundation-data-types-vs-c-primative-data-types"></a>
 Foundation Data Types vs C Primative Data Types
 -----------------------------------------------
 Use `NSInteger`, `NSUInteger` and 'CGFloat' instead of `int`, `long`, `unsigned int`, `unsigned long`, `float`, or `double`. This makes your code 64bit safe.
@@ -277,6 +287,7 @@ NSString *name = @"Waldo";
 id name = @"Waldo";
 ```
 
+<a name="cggeometry-methods"></a>
 CGGeometry Methods
 ------------------
 Use CGGeometry methods (`CGRectGetMinX`, `CGRectGetHeight`, etc) rather than grabbing frame properties manually. 
@@ -293,10 +304,12 @@ CGFloat carWidth = car.frame.size.width;
 
 Also, consider the other awesome abilities of CGGeometry when manupulating `CGRect`s in any way. NSHipster has [a good article](http://nshipster.com/cggeometry/) about this.
 
+<a name="view-controller-class-names"></a>
 View Controller Class Names
 -----------
 View controller names follow standard class naming conventions (capitolized project prefix, camelcased descriptive name) but are also suffixed with either `ViewController`, `TableViewController` or `CollectionViewController`, depending on type. Avoid shortening to `VC`, `TVC`, or `CVC`.
 
+<a name="class-headers"></a>
 Class Headers
 ------------
 Keep headers as simple as possible. Only include properties and methods that other classes need access to. Consider making some properties readonly if they shouldn't be changed by an outside class. 
@@ -337,6 +350,7 @@ Header files should be organized as so:
 +(XYZNoteView *)noteViewFromPassenger:(Passenger *)passenger;
 ```
 
+<a name="implementation"></a>
 Implementation
 --------------
 Implementation files should be organized in a useful way.
@@ -359,6 +373,7 @@ Each of these sections should be seperated with a `#pragma mark` as so:
 
 Sections can be further broken down into subsections by using `#pragma mark` without the hyphen.
 
+<a name="protocols"></a>
 Protocols
 ---------
 Protocol methods go under `@optional` unless a delegation absolutely won't function without the protocol method. It is good practice to allow the object of the protocol to be passed to the delegate. This will allow multiple delegations on the delegate object.
@@ -378,6 +393,7 @@ Protocol methods go under `@optional` unless a delegation absolutely won't funct
 @end
 ```
 
+<a name="subclassing-categories-and-extensions"></a>
 Subclassing, Categories and Extensions
 --------------------------------------
 When possible, it is best to use categories rather than subclassing. This will encourage composition over inheritance. Categories should serve one function. For example, you might define `UIColor+XYZProjectColor` to house methods for retrieving common colors used in your project. If you have a need for custom color blending methods, create a second category named `UIColor+XYZColorBlend`.
@@ -386,6 +402,7 @@ Extensions are another way to avoid subclassing. Use these when you simply need 
 
 When subclassing must be used, name the subclass in a way that suggests the super class. For example, `XYZMenuView` might be subclassed as `XYZCarMenuView`.
 
+<a name="project-organization"></a>
 Project Organization
 --------------------
 Files should be organized in directories that match their XCode groups.
