@@ -238,6 +238,7 @@ NSArray *colorNames = @[@"blue", @"red", @"green"];
 NSDictionary *driver = @{@"name": name, @"maxSpeed": maxSpeed, @"nickName": @"crash"};
 ```
 
+<a name="booleans"></a>
 Booleans
 --------
 `BOOL` should always be used over `bool`. BOOLs should always be compared as so:
