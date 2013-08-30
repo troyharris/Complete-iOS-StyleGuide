@@ -2,3 +2,4 @@ permalink: /:title
 safe: true
 lsi: false
 pygments: true
+markdown: redcarpet

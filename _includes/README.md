@@ -33,7 +33,7 @@ Objective-C should be coded in a way that is very descriptive. If done right, co
 Comments should be written on their own line and have a blank line between itself and the code above it. Block comments should be avoided. 
 
 **Example**
-```Objective-C
+```objc
 int carCount = 0;
 
 //This is a comment for the line below
@@ -51,7 +51,7 @@ Brackets
 Opening brackets should be at the end of line of the statement they are bracketing. Closing brackets should be on their own lines. Conditionals should always have brackets.
 
 *Example*
-```Objective-C
+```objc
 //Good
 if (number == 1) {
 	[self doThings];
@@ -77,7 +77,7 @@ if (number == 1) { [self doThings]; }
 An exception to the rule is `else` statements. These should be on the same line as the closing bracket. This serves as a visual indicator that the `else` block is related to the `if` block.
 
 *Example*
-```Objective-C
+```objc
 //Good
 if (number == 1) {
 	[self doSomething];
@@ -106,7 +106,7 @@ Variables
 Variables should be named descriptively and avoid use of acronyms. Pointer asterisk should be with the variable name. If the variable is of a common type, avoid putting that in the name. Variable names should start with a lowercase letter and be camelcased.
 
 **Examples**
-```Objective-C
+```objc
 //Good
 NSString *carModel = @"Mustang";
 CGFloat noteViewWidth = 30;
@@ -119,7 +119,7 @@ CGFloat nwidth = 30;
 
 There are times when it is acceptible to add the type in the variable name when omitting it may lead to confusion. For example:
 
-```Objective-C
+```objc
 NSDate *currentDate = [NSDate date];
 //'String' is appended to the variable name to avoid confusion that it might be an NSDate object.
 NSString *currentDateString = [XYZDateFormatter stringFromDate:currentDate];
@@ -129,7 +129,7 @@ Methods
 -------
 Methods should be formatted as so (notice the space after the scope symbol)
 
-```Objective-C
+```objc
 //Instance method
 - (void)buildJSONRequestFromString:(NSString *)request withTag:(int)tag;
  
@@ -140,7 +140,7 @@ Method names should be as descriptive as possible. Avoid using names that start 
 
 If possible, methods should return its last line of code:
 
-```Objective-C
+```objc
 //Good
 - (NSString *)stringFromInt:(int)number {
 	return [NSString stringWithFormat:@"%d", number];
@@ -158,7 +158,7 @@ Properties
 Properties should be defined for all instance variables whenever possible. Only declare properties in the header file when outside classes need access. Avoid using @synthesize unless needed to make a public readonly property privately writable. Avoid accessing instance variables directly unless in initializer methods, dealloc, or getter and setter methods.
 
 **Examples**
-```Objective-C
+```objc
 //Good
 self.notes = [[NSArray alloc] init];
 
@@ -189,7 +189,7 @@ Constants
 Instance constants should start with a lowercase `k`, followed by the project prefix, followed by a descriptive name.
 
 **Example**
-```Objective-C
+```objc
 static NSString * const kXYZProjectCellID = @"ProjectCell";
 static CGFloat const kXYZMenuTopMargin = 80;
 ```
@@ -202,7 +202,7 @@ An `enum` should be defined using NS_ENUM and bitmasks should be defined using N
 
 **Examples**
 
-```Objective-C
+```objc
 // enum
 typedef NS_ENUM(NSInteger, XYZCarType) {
     XYZCarTypeVan,
@@ -224,7 +224,7 @@ Literals
 --------
 `NSString`, `NSNumber`, `NSArray`, and `NSDictionary` literals should be used whenever possible.
 
-```Objective-C
+```objc
 NSString *name = @"John Doe";
 NSNumber *maxSpeed = @160;
 NSNumber *halfSpeed = @(maxSpeed / 2);
@@ -236,7 +236,7 @@ Booleans
 --------
 `BOOL` should always be used over `bool`. BOOLs should always be compared as so:
 
-```Objective-C
+```objc
 //Good
 if (person.isRunning) {
 }
@@ -261,7 +261,7 @@ Dynamic vs Static Typing
 Static typing should nearly always be used unless dynamic typing is absolutely necessary or greatly simplifies the code.
 
 **Example**
-```Objective-C
+```objc
 //Good
 NSString *name = @"Waldo";
 
@@ -275,7 +275,7 @@ Use CGGeometry methods (`CGRectGetMinX`, `CGRectGetHeight`, etc) rather than gra
 
 **Example**
 
-```Objective-C
+```objc
 //Good
 CGFloat carWidth = CGRectGetWidth(car.frame);
 
@@ -295,7 +295,7 @@ Keep headers as simple as possible. Only include properties and methods that oth
 
 Header files should be organized as so:
 
-```Objective-C
+```objc
 //Import statements first. Import in this order: superclass, frameworks, local classes
 #import "XYZSuperView.h"
 #import <UIKit/UIKit.h>
@@ -345,7 +345,7 @@ Methods should be organized in the following order:
 
 Each of these sections should be seperated with a `#pragma mark` as so:
 
-```Objective-C
+```objc
 #pragma mark - UIViewController methods
 ```
 
@@ -356,7 +356,7 @@ Protocols
 Protocol methods go under `@optional` unless a delegation absolutely won't function without the protocol method. It is good practice to allow the object of the protocol to be passed to the delegate. This will allow multiple delegations on the delegate object.
 
 For example:
-```Objective-C
+```objc
 //We must call @class first on our own class because the @protocol comes before the @interface
 @class XYZNotePopover
 @protocol XYZNotePopoverDelegate <NSObject>
