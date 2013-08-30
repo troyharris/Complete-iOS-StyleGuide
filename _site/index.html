@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Complete iOS/Objective-C Style Guide</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+      <link href="css/main.css" media="screen, print" rel="stylesheet" />
+  </head>
+  <body>
+  	<a href="https://github.com/troyharris/Complete-iOS-StyleGuide"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+  	<div id="content">
+    <h1>Complete iOS Developer Style Guide</h1>
+
+<p>There are many Objective-C / CocoaTouch / iOS style guides out there but none of them touch on everything. This is an attempt to be a complete style guide that will cover all aspects of iOS/Objective-C development.</p>
+
+<p>This guide is ultimately intended to be a community project, owned by everyone. Push requests are asked for to fill in the holes, fix problems, or add clarity and detail. If you are submitting a change or addition that is non-standard or obscure, please include some reference as to the reasoning. Apple documentation and community consensus will trump personal preference.</p>
+
+<h2>Table of Contents</h2>
+
+<ul>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#prefixing">Prefixing</a></li>
+<li><a href="#brackets">Brackets</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#enums-and-bitmasks">Enums and Bitmasks</a></li>
+<li><a href="#literals">Literals</a></li>
+<li><a href="#booleans">Booleans</a></li>
+<li><a href="#foundation-data-types-vs-c-primative-data-types">Foundation Data Types vs C Primative Data Types</a></li>
+<li><a href="#dynamic-vs-static-typing">Dynamic vs Static Typing</a></li>
+<li><a href="#cggeometry-methods">CGGeometry Methods</a></li>
+<li><a href="#view-controller-class-names">View Controller Class Names</a></li>
+<li><a href="#class-headers">Class Headers</a></li>
+<li><a href="#implementation">Implementation</a></li>
+<li><a href="#subclassing-categories-and-extensions">Subclassing, Categories and Extensions</a></li>
+<li><a href="#project-organization">Project Organization</a></li>
+</ul>
+
+<p><a name="comments"></a></p>
+
+<h2>Comments</h2>
+
+<p>Objective-C should be coded in a way that is very descriptive. If done right, comments can be kept to a minimum. Only comment when you need to explain <em>why</em> the code is written the way it is.</p>
+
+<p>Comments should be written on their own line and have a blank line between itself and the code above it. Block comments should be avoided. </p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="kt">int</span> <span class="n">carCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//This is a comment for the line below</span>
+<span class="n">carCount</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>
+<p><a name="prefixing"></a></p>
+
+<h2>Prefixing</h2>
+
+<p>Every project should have a three character, capitolized prefix to be used in class names, static variables, <code>#define</code>s, etc. Each project should have its own prefix rather than using a company prefix or a person&#39;s initials.</p>
+
+<p>Core data names and NSManagedObject subclasses should not use the prefix.</p>
+
+<p><a name="brackets"></a></p>
+
+<h2>Brackets</h2>
+
+<p>Opening brackets should be at the end of line of the statement they are bracketing. Closing brackets should be on their own lines. Conditionals should always have brackets.</p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doThings</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doThings</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doThings</span><span class="p">];</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">[</span><span class="n">self</span> <span class="n">doThings</span><span class="p">];</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="n">self</span> <span class="n">doThings</span><span class="p">];</span> <span class="p">}</span>
+</code></pre></div>
+<p>An exception to the rule is <code>else</code> statements. These should be on the same line as the closing bracket. This serves as a visual indicator that the <code>else</code> block is related to the <code>if</code> block.</p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomething</span><span class="p">];</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomethingElse</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//Good</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomething</span><span class="p">];</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomethingElse</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomething</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">doSomethingElse</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a name="variables"></a></p>
+
+<h2>Variables</h2>
+
+<p>Variables should be named descriptively and avoid use of acronyms. Pointer asterisk should be with the variable name. If the variable is of a common type, avoid putting that in the name. Variable names should start with a lowercase letter and be camelcased.</p>
+
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="n">NSString</span> <span class="o">*</span><span class="n">carModel</span> <span class="o">=</span> <span class="s">@&quot;Mustang&quot;</span><span class="p">;</span>
+<span class="n">CGFloat</span> <span class="n">noteViewWidth</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+
+
+<span class="c1">//Bad</span>
+<span class="n">NSString</span> <span class="o">*</span> <span class="n">carModelString</span> <span class="o">=</span> <span class="s">@&quot;Mustang&quot;</span><span class="p">;</span>
+<span class="n">CGFloat</span> <span class="n">nwidth</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+</code></pre></div>
+<p>There are times when it is acceptible to add the type in the variable name when omitting it may lead to confusion. For example:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="n">NSDate</span> <span class="o">*</span><span class="n">currentDate</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDate</span> <span class="n">date</span><span class="p">];</span>
+<span class="c1">//&#39;String&#39; is appended to the variable name to avoid confusion that it might be an NSDate object.</span>
+<span class="n">NSString</span> <span class="o">*</span><span class="n">currentDateString</span> <span class="o">=</span> <span class="p">[</span><span class="n">XYZDateFormatter</span> <span class="n">stringFromDate</span><span class="o">:</span><span class="n">currentDate</span><span class="p">];</span>
+</code></pre></div>
+<p><a name="methods"></a></p>
+
+<h2>Methods</h2>
+
+<p>Methods should be formatted as so (notice the space after the scope symbol)</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Instance method</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">buildJSONRequestFromString:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">request</span> <span class="nf">withTag:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">tag</span><span class="p">;</span>
+
+<span class="c1">//Class method</span>
+<span class="k">+</span> <span class="p">(</span><span class="n">XYZString</span> <span class="o">*</span><span class="p">)</span><span class="nf">uppercaseStringFromString:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">string</span><span class="p">;</span>
+</code></pre></div>
+<p>Method names should be as descriptive as possible. Avoid using names that start off with <em>set</em> or <em>get</em> unless it is a setter or getter method. Also avoid the prefix <em>is</em> unless it returns a BOOL.</p>
+
+<p>If possible, methods should return its last line of code:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">stringFromInt:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">number</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%d&quot;</span><span class="p">,</span> <span class="n">number</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//Bad</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">stringFromInt:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">number</span> <span class="p">{</span>
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">numberString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%d&quot;</span><span class="p">,</span> <span class="n">number</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">numberString</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a name="properties"></a></p>
+
+<h2>Properties</h2>
+
+<p>Properties should be defined for all instance variables whenever possible. Only declare properties in the header file when outside classes need access. Avoid using @synthesize unless needed to make a public readonly property privately writable. Avoid accessing instance variables directly unless in initializer methods, dealloc, or getter and setter methods.</p>
+
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="n">self</span><span class="p">.</span><span class="n">notes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+
+<span class="c1">//Bad</span>
+<span class="n">_notes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSArray</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+
+<span class="c1">//Good</span>
+<span class="k">@interface</span> <span class="nc">XYZNoteView</span> : <span class="nc">XYZSuperView</span>
+
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">notes</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="c1">//Bad</span>
+<span class="k">@interface</span> <span class="nc">XYZNoteView</span> : <span class="nc">XYZSuperView</span> <span class="p">{</span>
+    <span class="n">NSArray</span> <span class="n">_notes</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">notes</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</code></pre></div>
+<p>Properties should always be accessed using dot notation (<code>car.model</code> rather than <code>[car model] or [car setModel]</code>).</p>
+
+<p><a name="constants"></a></p>
+
+<h2>Constants</h2>
+
+<p>Instance constants should start with a lowercase <code>k</code>, followed by the project prefix, followed by a descriptive name.</p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="k">static</span> <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">kXYZProjectCellID</span> <span class="o">=</span> <span class="s">@&quot;ProjectCell&quot;</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">CGFloat</span> <span class="k">const</span> <span class="n">kXYZMenuTopMargin</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+</code></pre></div>
+<p>Use of <code>#define</code> to set constants should be avoided.</p>
+
+<p><a name="enums-and-bitmasks"></a></p>
+
+<h2>Enums and bitmasks</h2>
+
+<p>An <code>enum</code> should be defined using NS<em>ENUM and bitmasks should be defined using NS</em>OPTIONS. The enum or bitmask should be named using the project prefix</p>
+
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">// enum</span>
+<span class="k">typedef</span> <span class="nf">NS_ENUM</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">,</span> <span class="n">XYZCarType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">XYZCarTypeVan</span><span class="p">,</span>
+    <span class="n">XYZCarTypeTruck</span><span class="p">,</span>
+    <span class="n">XYZCarTypeSedan</span><span class="p">,</span>
+    <span class="n">XYZCarTypeHybrid</span>
+<span class="p">};</span>
+
+<span class="c1">// bitmask</span>
+<span class="k">typedef</span> <span class="nf">NS_OPTIONS</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">,</span> <span class="n">XYZCollisionCategory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">XYZCollisionCategoryCar</span><span class="p">,</span>
+    <span class="n">XYZCollisionCategoryWall</span><span class="p">,</span>
+    <span class="n">XYZCollisionCategoryBuilding</span><span class="p">,</span>
+    <span class="n">XYZCollisionCategoryPerson</span>
+<span class="p">};</span>
+</code></pre></div>
+<p><a name="literals"></a></p>
+
+<h2>Literals</h2>
+
+<p><code>NSString</code>, <code>NSNumber</code>, <code>NSArray</code>, and <code>NSDictionary</code> literals should be used whenever possible.</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="n">NSString</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;John Doe&quot;</span><span class="p">;</span>
+<span class="n">NSNumber</span> <span class="o">*</span><span class="n">maxSpeed</span> <span class="o">=</span> <span class="mi">@160</span><span class="p">;</span>
+<span class="n">NSNumber</span> <span class="o">*</span><span class="n">halfSpeed</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="n">maxSpeed</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">NSArray</span> <span class="o">*</span><span class="n">colorNames</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;blue&quot;</span><span class="p">,</span> <span class="s">@&quot;red&quot;</span><span class="p">,</span> <span class="s">@&quot;green&quot;</span><span class="p">];</span>
+<span class="n">NSDictionary</span> <span class="o">*</span><span class="n">driver</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span> <span class="n">name</span><span class="p">,</span> <span class="s">@&quot;maxSpeed&quot;</span><span class="o">:</span> <span class="n">maxSpeed</span><span class="p">,</span> <span class="s">@&quot;nickName&quot;</span><span class="o">:</span> <span class="s">@&quot;crash&quot;</span><span class="p">};</span>
+</code></pre></div>
+<p><a name="booleans"></a></p>
+
+<h2>Booleans</h2>
+
+<p><code>BOOL</code> should always be used over <code>bool</code>. BOOLs should always be compared as so:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">isRunning</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">person</span><span class="p">.</span><span class="n">isRunning</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">//Bad</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">isRunning</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">isRunning</span> <span class="o">==</span> <span class="nb">NO</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">isRunning</span> <span class="o">==</span> <span class="nb">YES</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a name="foundation-data-types-vs-c-primative-data-types"></a></p>
+
+<h2>Foundation Data Types vs C Primative Data Types</h2>
+
+<p>Use <code>NSInteger</code>, <code>NSUInteger</code> and &#39;CGFloat&#39; instead of <code>int</code>, <code>long</code>, <code>unsigned int</code>, <code>unsigned long</code>, <code>float</code>, or <code>double</code>. This makes your code 64bit safe.</p>
+
+<h2>Dynamic vs Static Typing</h2>
+
+<p>Static typing should nearly always be used unless dynamic typing is absolutely necessary or greatly simplifies the code.</p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="n">NSString</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;Waldo&quot;</span><span class="p">;</span>
+
+<span class="c1">//Bad (unless you have a very good reason to do it)</span>
+<span class="kt">id</span> <span class="n">name</span> <span class="o">=</span> <span class="s">@&quot;Waldo&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p><a name="cggeometry-methods"></a></p>
+
+<h2>CGGeometry Methods</h2>
+
+<p>Use CGGeometry methods (<code>CGRectGetMinX</code>, <code>CGRectGetHeight</code>, etc) rather than grabbing frame properties manually. </p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Good</span>
+<span class="n">CGFloat</span> <span class="n">carWidth</span> <span class="o">=</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">frame</span><span class="p">);</span>
+
+<span class="c1">//Bad</span>
+<span class="n">CGFloat</span> <span class="n">carWidth</span> <span class="o">=</span> <span class="n">car</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</code></pre></div>
+<p>Also, consider the other awesome abilities of CGGeometry when manupulating <code>CGRect</code>s in any way. NSHipster has <a href="http://nshipster.com/cggeometry/">a good article</a> about this.</p>
+
+<p><a name="view-controller-class-names"></a></p>
+
+<h2>View Controller Class Names</h2>
+
+<p>View controller names follow standard class naming conventions (capitolized project prefix, camelcased descriptive name) but are also suffixed with either <code>ViewController</code>, <code>TableViewController</code> or <code>CollectionViewController</code>, depending on type. Avoid shortening to <code>VC</code>, <code>TVC</code>, or <code>CVC</code>.</p>
+
+<p><a name="class-headers"></a></p>
+
+<h2>Class Headers</h2>
+
+<p>Keep headers as simple as possible. Only include properties and methods that other classes need access to. Consider making some properties readonly if they shouldn&#39;t be changed by an outside class. </p>
+
+<p>Header files should be organized as so:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//Import statements first. Import in this order: superclass, frameworks, local classes</span>
+<span class="cp">#import &quot;XYZSuperView.h&quot;</span>
+<span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+<span class="cp">#import &quot;XYZCar.h&quot;</span>
+
+<span class="c1">//Classes should be forward declared whenever possible. Just make sure you #import in the .m file.</span>
+<span class="err">@</span><span class="kt">Class</span> <span class="n">XYZDriver</span><span class="p">;</span>
+<span class="err">@</span><span class="kt">Class</span> <span class="n">XYZPassenger</span><span class="p">;</span>
+
+<span class="c1">//Any protocol definitions next. Protocol should always include the class name in its own name.</span>
+<span class="k">@protocol</span> <span class="nc">XYZNotePopoverDelegate</span> <span class="o">&lt;</span><span class="n">NSObject</span><span class="o">&gt;</span>
+
+<span class="k">@optional</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">closedPopover</span><span class="o">:</span><span class="p">(</span><span class="n">XYZNotePopover</span> <span class="o">*</span><span class="p">)</span><span class="n">notePopover</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="c1">//Interface</span>
+<span class="k">@interface</span> <span class="nc">XYZNoteView</span> : <span class="nc">XYZSuperView</span> <span class="o">&lt;</span><span class="n">XYZCarDelegate</span><span class="o">&gt;</span>
+
+<span class="c1">//Properties - Only properties that need to be included publicly. Otherwise, define in the .m file</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">XYZDriver</span> <span class="o">*</span><span class="n">driver</span><span class="p">;</span>
+
+<span class="c1">//Even create properties for C primitive types</span>
+<span class="k">@property</span> <span class="kt">int</span> <span class="n">numberOfCrashes</span><span class="p">;</span>
+
+<span class="c1">//Instance methods</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">driverNameFromDriver:</span><span class="p">(</span><span class="n">Driver</span> <span class="o">*</span><span class="p">)</span><span class="nv">driver</span><span class="p">;</span>
+
+<span class="c1">//Class methods</span>
+<span class="k">+</span><span class="p">(</span><span class="n">XYZNoteView</span> <span class="o">*</span><span class="p">)</span><span class="nf">noteViewFromPassenger:</span><span class="p">(</span><span class="n">Passenger</span> <span class="o">*</span><span class="p">)</span><span class="nv">passenger</span><span class="p">;</span>
+</code></pre></div>
+<p><a name="implementation"></a></p>
+
+<h2>Implementation</h2>
+
+<p>Implementation files should be organized in a useful way.</p>
+
+<p>Methods should be organized in the following order: </p>
+
+<ul>
+<li>Init and dealloc methods</li>
+<li>Super class methods being overwritten</li>
+<li>Custom getters and setters</li>
+<li>Delegate methods</li>
+<li>Private instance methods</li>
+<li>Public instance methods (methods defined in the header file)</li>
+<li>Public class methods (methods defined in the header file)</li>
+</ul>
+
+<p>Each of these sections should be seperated with a <code>#pragma mark</code> as so:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#pragma mark - UIViewController methods</span>
+</code></pre></div>
+<p>Sections can be further broken down into subsections by using <code>#pragma mark</code> without the hyphen.</p>
+
+<p><a name="protocols"></a></p>
+
+<h2>Protocols</h2>
+
+<p>Protocol methods go under <code>@optional</code> unless a delegation absolutely won&#39;t function without the protocol method. It is good practice to allow the object of the protocol to be passed to the delegate. This will allow multiple delegations on the delegate object.</p>
+
+<p><strong>Example</strong></p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="c1">//We must call @class first on our own class because the @protocol comes before the @interface</span>
+<span class="k">@class</span> <span class="nc">XYZNotePopover</span>
+<span class="k">@protocol</span> <span class="nc">XYZNotePopoverDelegate</span> <span class="o">&lt;</span><span class="n">NSObject</span><span class="o">&gt;</span>
+
+<span class="k">@optional</span>
+
+<span class="c1">//We pass the XYZNotePopover to the delegate so it can determine who called it.</span>
+<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">closedPopover</span><span class="o">:</span><span class="p">(</span><span class="n">XYZNotePopover</span> <span class="o">*</span><span class="p">)</span><span class="n">notePopover</span><span class="p">;</span>
+
+<span class="k">@end</span>
+</code></pre></div>
+<p><a name="subclassing-categories-and-extensions"></a></p>
+
+<h2>Subclassing, Categories and Extensions</h2>
+
+<p>When possible, it is best to use categories rather than subclassing. This will encourage composition over inheritance. Categories should serve one function. For example, you might define <code>UIColor+XYZProjectColor</code> to house methods for retrieving common colors used in your project. If you have a need for custom color blending methods, create a second category named <code>UIColor+XYZColorBlend</code>.</p>
+
+<p>Extensions are another way to avoid subclassing. Use these when you simply need to add additional properties to a custom class. Private properties should be declared in an anonymous extension.</p>
+
+<p>When subclassing must be used, name the subclass in a way that suggests the super class. For example, <code>XYZMenuView</code> might be subclassed as <code>XYZCarMenuView</code>.</p>
+
+<p><a name="project-organization"></a></p>
+
+<h2>Project Organization</h2>
+
+<p>Files should be organized in directories that match their XCode groups.</p>
+
+<p>MVC seperation should be applied to directories and groups: data model classes, view controllers and custom views should be seperate directories. </p>
+
+<p>Other groups and directories should be created for other assets and classes in some sort of logical scheme based on the project. The root directory should only contain <code>AppDelegate.h</code> and <code>AppDelegate.m</code></p>
+
+<p>Leave things that XCode creates automatically (such as <code>main.m</code> and <code>Prefix.pch</code>) in their original location and their original name whenever possible.</p>
+
+	</div id="content">
+  </body>
+</html>
