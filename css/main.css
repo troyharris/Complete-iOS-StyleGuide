@@ -1,11 +1,13 @@
+html {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #fff;
+  position: relative; /* Fix for absolute positioning */
+}
 body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.2em;
 	line-height: 1.5em;
-}
-div#content {
-	width: 960px;
-	margin: 0 auto;
 }
 ul {
 	list-style-type: none;
@@ -23,6 +25,9 @@ h1 {
 h2 {
 	font-size: 1.8em;
 	margin-top: 2.0em;
+}
+pre {
+	font-size: 0.8em;
 }
 .hll { background-color: #ffffcc }
 .c { color: #888888 } /* Comment */
