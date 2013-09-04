@@ -1,5 +1,7 @@
 Complete iOS Developer Style Guide
 ==================================
+*This guide has its own website: [http://iosstyle.us](http://iosstyle.us)*
+
 There are many Objective-C / CocoaTouch / iOS style guides out there but none of them touch on everything. This is an attempt to be a complete style guide that will cover all aspects of iOS/Objective-C development.
 
 This guide is ultimately intended to be a community project, owned by everyone. Push requests are asked for to fill in the holes, fix problems, or add clarity and detail. If you are submitting a change or addition that is non-standard or obscure, please include some reference as to the reasoning. Apple documentation and community consensus will trump personal preference.
