@@ -349,7 +349,7 @@ Header files should be organized as so:
 - (NSString *)driverNameFromDriver:(Driver *)driver;
 
 //Class methods
-+(XYZNoteView *)noteViewFromPassenger:(Passenger *)passenger;
++ (XYZNoteView *)noteViewFromPassenger:(Passenger *)passenger;
 ```
 
 <a name="implementation"></a>
